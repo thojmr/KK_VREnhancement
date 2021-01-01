@@ -22,7 +22,7 @@ namespace KK_VREnhancement
             coroutineActive = false;
         }
 
-        //Got tired of searching for the correct hooks, just check for new dynamic bones on a loop
+        //Got tired of searching for the correct hooks, just check for new dynamic bones on a loop.  Genious!
         internal static IEnumerator LoopEveryXSeconds()
         {
             while(coroutineActive) {                

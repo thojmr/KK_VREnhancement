@@ -1,5 +1,5 @@
 # Introduction
-This repository contains the KK_VREnhancement plugin, that adds a few enhancements for VR in story mode
+This repository contains the KK_VREnhancement plugin, that adds a few enhancements for VR in story mode.  Requires KoikatuVR.
 
 ## Additions
 - Adds colliders to the VR controllers so you can use your hands for more than just menus.  Go forth and Boop!
@@ -28,7 +28,7 @@ Install the C# extension for VSCode.
 Make sure the following directory exists `C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/msbuild.exe`.  If not you will need to install the VS2019 MS build tools (There may be other ways to build, but this is the one that eventually worked for me)
 Install nuget.exe and set the environment path to it. 
 Then use `nuget install -OutputDirectory ../packages` to install the dependancies from the \KK_VREnhancement\ directory.  
-You also need a non nuget package VRGIN.dll that should already be in your <KK install folder>/bepinex/plugins directory.  Just copy it into ./packages/
+You also need a non nuget package VRGIN.dll that should already be in your <KK install folder>/bepinex/ directory.  Just copy it into ./packages/
 Finally create a build script with tasks.json in VSCode.
 Example build task:
 ```json
@@ -66,4 +66,3 @@ Example build task:
 }
 ```
 If sucessfull you should see a KK_VREnhancement.dll file in \bin\
-

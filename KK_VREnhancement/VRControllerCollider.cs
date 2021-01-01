@@ -19,7 +19,7 @@ namespace KK_VREnhancement
             DynamicBoneCollider rightControllerCollider = GetControllerCollider<RightController>(Right_Controller_DB_Name);
             if (leftControllerCollider == null && rightControllerCollider == null) return;
 
-            //For each controller, make it collidable with all dynaic bones
+            //For each controller, make it collidable with all dynaic bones (Did I miss any?)
             AddControllerColliderToDBv2(leftControllerCollider, dynamicBonesV2);
             AddControllerColliderToDBv2(rightControllerCollider, dynamicBonesV2);
             AddControllerColliderToDB(leftControllerCollider, dynamicBones);
