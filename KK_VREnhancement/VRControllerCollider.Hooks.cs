@@ -27,9 +27,23 @@ namespace KK_VREnhancement
         internal static void NPC_Create(bool isShuffle)
         {
             if (!VRPlugin.VREnabled || !VRPlugin.EnableControllerColliders.Value) return;
+            if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" NPCLoadAll ");
         
             VRControllerColliderHelper.TriggerHelperCoroutine(_pluginInstance);
         }
+
+
+
+
+        // 		private void Awake()
+		// {
+		// 	SceneManager.sceneLoaded += new UnityAction<Scene, LoadSceneMode>(this.SceneManager_sceneLoaded);
+		// 	this.SceneManager_sceneLoaded(SceneManager.GetActiveScene(), 0);
+		// }
+
+		// // Token: 0x06000002 RID: 2 RVA: 0x00002074 File Offset: 0x00000274
+		// private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode lsm)
+		// {
 
     }
 }

@@ -64,6 +64,10 @@
       <HintPath>..\packages\IllusionLibs.Koikatu.UnityEngine.UI.5.6.2\lib\net35\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="KKAPI, Version=1.12.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IllusionModdingAPI.KKAPI.1.12.3\lib\net35\KKAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
 
 
      <Reference Include="VRGIN, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -76,6 +80,7 @@
     <Compile Include="VREnhancementPlugin.cs" />
     <Compile Include="VRCamera.Hooks.cs" />
     <Compile Include="VRCamera.cs" />
+    <Compile Include="VRCamera.GameCustomFunctionController.cs" />
     <Compile Include="VRCamera.Helper.cs" />
     <Compile Include="VRControllerCollider.Hooks.cs" />
     <Compile Include="VRControllerCollider.Helper.cs" />

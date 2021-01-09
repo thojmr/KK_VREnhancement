@@ -4,11 +4,12 @@ using BepInEx.Configuration;
 using HarmonyLib;
 using System;
 using VRGIN.Helpers;
+using KKAPI.MainGame;
 
 namespace KK_VREnhancement 
 {
     [BepInPlugin(GUID, GUID, Version)]
-    public partial class VRPlugin : BaseUnityPlugin 
+    public class VRPlugin : BaseUnityPlugin 
     {
         public const string GUID = "KK_VREnhancement";
         public const string Version = "0.1";
@@ -18,12 +19,18 @@ namespace KK_VREnhancement
         internal static new ManualLogSource Logger { get; private set; }
         internal static bool VREnabled = false;
 
+#if DEBUG
+        internal static bool debugLog = true;
+#else
+        internal static bool debugLog = false;
+#endif
+
         internal void Start() 
         {
             Logger = base.Logger;
 
             MoveWithTalkScene = Config.Bind<bool>("", "Enable move with scene", true, 
-                "Will move the VR camera view in front of the heroine as they move around during TalkScene/HScene\n\nWhen disabled, you stay put as the heroine moves around.");
+                "Will move the VR camera view in front of the heroine as they move around during TalkScene/HScene.  This mimics the default KK behavior. \n\nWhen disabled, you stay put as the heroine moves around.");
             MoveWithTalkScene.SettingChanged += MoveWithTalkScene_SettingsChanged;
 
             EnableControllerColliders = Config.Bind<bool>("", "Enable VR controller colliders", true, 
@@ -35,8 +42,12 @@ namespace KK_VREnhancement
             bool vrFlag = Environment.CommandLine.Contains("--novr");
             VREnabled = !noVrFlag && (vrFlag || SteamVRDetector.IsRunning);            
 
+            if (debugLog) VRPlugin.Logger.Log(LogLevel.Info, $" VREnabled {VREnabled}");
+            
             //IF not VR dont bother with VR hooks
             if (!VREnabled) return;
+
+            GameAPI.RegisterExtraBehaviour<VRCameraGameController>(GUID);
 
             //Harmony init.  It's magic!
             Harmony harmony = new Harmony(GUID);

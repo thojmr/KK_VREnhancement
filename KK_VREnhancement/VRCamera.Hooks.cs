@@ -2,6 +2,7 @@ using HarmonyLib;
 using UnityEngine;
 using ADV;
 using System.Collections.Generic;
+using KKAPI.MainGame;
 
 namespace KK_VREnhancement
 {
@@ -42,6 +43,7 @@ namespace KK_VREnhancement
         internal static void TalkScene_OnDestroy(TalkScene __instance)
         {
             if (!VRPlugin.MoveWithTalkScene.Value) return;
+            if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" TalkScene_OnDestroy ");
 
             VRCameraController.ClearLastPosition();                
         }
@@ -52,6 +54,7 @@ namespace KK_VREnhancement
         internal static void HSceneProc_SetLocalPosition(HSceneProc __instance)
         {
             if (!VRPlugin.VREnabled || !VRPlugin.MoveWithTalkScene.Value) return;
+            if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" SetLocalPosition ");
             
             List<ChaControl> lstFemale = Traverse.Create(__instance).Field("lstFemale").GetValue<List<ChaControl>>();
             if (lstFemale == null || lstFemale[0] == null) return;
@@ -66,15 +69,53 @@ namespace KK_VREnhancement
             VRCameraController.MoveToFaceHeroine_HScene(femaleTransform.position, femaleTransform.rotation);
         }        
 
-        //When the HScene is done clear the last position
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(HSceneProc), "OnDestroy")]
-        internal static void HSceneProc_OnDestroy(HSceneProc __instance)
-        {
-            if (!VRPlugin.VREnabled || !VRPlugin.MoveWithTalkScene.Value) return;
-            
-            VRCameraController.ClearLastPosition();                
-        }
+
+        //         /// <summary>
+        // /// Triggers when changing location in h scenes
+        // /// </summary>
+        // [HarmonyPostfix]
+        // [HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.ChangeCategory))]
+        // private static void HLocationChangeHook(List<ChaControl> ___lstFemale)
+        // {
+        //     try
+        //     {
+        //         var hsceneCenterPoint = ___lstFemale[0].transform.position;
+        //         MobManager.GatherMobsAroundPoint(hsceneCenterPoint);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         UnityEngine.Debug.LogException(ex);
+        //     }
+        // }
+
+
+        //         [HarmonyPostfix]
+        // [HarmonyPatch(typeof(ChaStatusScene), "Start")]
+        // private static void CreateButtons(ChaStatusScene __instance, ChaStatusComponent ___cmpMale)
+
+
+        // [HarmonyPrefix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeClothesShorts))]
+        //     private static void ChangeClothesShorts(ChaControl __instance) => chaControl = __instance;
+
+        // [HarmonyPostfix, HarmonyPatch(typeof(Info), "Init")]
+        // private static void InfoInit(Info __instance) => ActionGameInfoInstance = __instance;
+
+
+        //             /// <summary>
+        // /// Something that happens at the end of H scene loading, good enough place to initialize stuff
+        // /// </summary>
+        // [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "MapSameObjectDisable")]
+        // private static void MapSameObjectDisable(HSceneProc __instance)
+        // {
+
+
+        //                 /// <summary>
+        // /// Set the new original position when changing positions via the H point picker scene
+        // /// </summary>
+        // /// <param name="__instance"></param>
+        // [HarmonyPostfix, HarmonyPatch(typeof(HSceneProc), "ChangeCategory")]
+        // private static void ChangeCategory(HSceneProc __instance)
+        // {
 
     }
 }
