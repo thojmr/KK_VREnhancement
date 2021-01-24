@@ -25,7 +25,8 @@ namespace KK_VREnhancement
         //Got tired of searching for the correct hooks, just check for new dynamic bones on a loop.  Genious!
         internal static IEnumerator LoopEveryXSeconds()
         {
-            while(coroutineActive) {                
+            while(coroutineActive) 
+            {                
                 VRControllerCollider.SetVRControllerColliderToDynamicBones();
 
                 // VRPlugin.Logger.Log(LogLevel.Info, $"Camera distance {distance}");

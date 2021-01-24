@@ -33,7 +33,7 @@ namespace KK_VREnhancement
                 "Will move the VR camera view in front of the heroine as they move around during TalkScene/HScene.  This mimics the default KK behavior. \n\nWhen disabled, you stay put as the heroine moves around.");
             MoveWithTalkScene.SettingChanged += MoveWithTalkScene_SettingsChanged;
 
-            EnableControllerColliders = Config.Bind<bool>("", "Enable VR controller colliders", true, 
+            EnableControllerColliders = Config.Bind<bool>("", "Enable VR controller collision (boop!)", true, 
                 "Allows collision of VR controllers with all dynamic bones.\n\nBoop!");
             EnableControllerColliders.SettingChanged += EnableControllerColliders_SettingsChanged;
 
@@ -42,7 +42,7 @@ namespace KK_VREnhancement
             bool vrFlag = Environment.CommandLine.Contains("--novr");
             VREnabled = !noVrFlag && (vrFlag || SteamVRDetector.IsRunning);            
 
-            if (debugLog) VRPlugin.Logger.Log(LogLevel.Info, $" VREnabled {VREnabled}");
+            if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" VREnabled {VREnabled}");
             
             //IF not VR dont bother with VR hooks
             if (!VREnabled) return;
@@ -58,17 +58,21 @@ namespace KK_VREnhancement
 
         internal void MoveWithTalkScene_SettingsChanged(object sender, System.EventArgs e) 
         {            
-            if (!MoveWithTalkScene.Value) {
+            if (!MoveWithTalkScene.Value) 
+            {
                 VRCameraController.ClearLastPosition();
             }
         }
 
         internal void EnableControllerColliders_SettingsChanged(object sender, System.EventArgs e) 
         {
-            if (!EnableControllerColliders.Value) {
+            if (!EnableControllerColliders.Value) 
+            {
                 //Just stop the dynamic bone search loop
                 VRControllerColliderHelper.StopHelperCoroutine(this);
-            } else {
+            } 
+            else 
+            {
                 if (!VREnabled) return;
                 VRControllerColliderHelper.TriggerHelperCoroutine(this);
             }

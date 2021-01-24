@@ -1,7 +1,9 @@
 ::Zips the dll into the correct directory structure for release
 ::Make sure to increment the version
 
-::CLear last release
-rd /s /q "./release"
+set kk_version=0.1
+set kk_name=KK_VREnhancement
 
-"%ProgramFiles%\7-Zip\7z.exe" a -tzip "./release/KK_VREnhancement v0.1.zip" "./bin/BepinEx" -mx0
+IF EXIST "./bin/%kk_name%/BepinEx/plugins/%kk_name%.dll" "%ProgramFiles%\7-Zip\7z.exe" a -tzip "%HOMEPATH%/downloads/%kk_name% v%kk_version%.zip" "./bin/%kk_name%/BepinEx" -mx0
+
+start %HOMEPATH%/downloads
