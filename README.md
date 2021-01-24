@@ -1,5 +1,6 @@
 # Introduction
 This repository contains the KK_VREnhancement plugin, that adds a few enhancements for VR in story mode.  Requires KoikatuVR.
+Not sure if I'll add much more to this right now.  Mostly working on other projects.
 
 ## Additions
 - Adds colliders to the VR controllers so you can use your hands for more than just menus.  Go forth and Boop!
@@ -7,7 +8,7 @@ This repository contains the KK_VREnhancement plugin, that adds a few enhancemen
 
 
 ## How to download
-(Coming soon) You can grab the latest plugin release [here](https://github.com/thojmr/KK_VREnhancement/releases), or build it yourself.  Explained further below.
+You can grab the first plugin release [here](https://github.com/thojmr/KK_VREnhancement/releases), or build it yourself.  Explained further below.
 
 ## How to install
 Almost all plugins are installed in the same way. If there are any extra steps needed they will be added to the plugin descriptions below.
