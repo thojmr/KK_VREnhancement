@@ -85,9 +85,9 @@
     <Compile Include="VRCamera.cs" />
     <Compile Include="VRCamera.GameCustomFunctionController.cs" />
     <Compile Include="VRCamera.Helper.cs" />
-    <Compile Include="VRControllerCollider.Hooks.cs" />
     <Compile Include="VRControllerCollider.Helper.cs" />
     <Compile Include="VRControllerCollider.cs" />
+    <Compile Include="VRControllerCollider.GameCustomFunctionController.cs" />
   </ItemGroup>
 
   <ItemGroup>

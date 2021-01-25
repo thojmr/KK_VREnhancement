@@ -27,7 +27,8 @@ namespace KK_VREnhancement
             Vector3 forwardVector2 = Calculator.GetForwardVector(VRCamera.Instance.SteamCam.head.rotation);
             VRCamera.Instance.SteamCam.origin.rotation *= Quaternion.FromToRotation(forwardVector2, forwardVector);
 
-            if (reverseRotate) {
+            if (reverseRotate) 
+            {
                 ReverseRotate(VRCamera.Instance.SteamCam.origin);
             }
         }

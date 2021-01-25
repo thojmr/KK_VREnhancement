@@ -29,12 +29,13 @@ namespace KK_VREnhancement
         internal void Start() 
         {
             Logger = base.Logger;
+            VRControllerColliderHelper.pluginInstance = this;
 
-            MoveWithTalkScene = Config.Bind<bool>("", "Enable move with scene", true, 
+            MoveWithTalkScene = Config.Bind<bool>("VR General", "Enable move with scene", true, 
                 "Will move the VR camera view in front of the heroine as they move around during TalkScene/HScene.  This mimics the default KK behavior. \n\nWhen disabled, you stay put as the heroine moves around.");
             MoveWithTalkScene.SettingChanged += MoveWithTalkScene_SettingsChanged;
 
-            EnableControllerColliders = Config.Bind<bool>("", "Enable VR controller collision (boop!)", true, 
+            EnableControllerColliders = Config.Bind<bool>("VR General", "Enable VR controller collision (boop!)", true, 
                 "Allows collision of VR controllers with all dynamic bones.\n\nBoop!");
             EnableControllerColliders.SettingChanged += EnableControllerColliders_SettingsChanged;
 
@@ -46,17 +47,19 @@ namespace KK_VREnhancement
             if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" VREnabled {VREnabled}");
             
             //IF not VR dont bother with VR hooks
-            if (!VREnabled) return;
+            if (!VREnabled) return;            
 
-            GameAPI.RegisterExtraBehaviour<VRCameraGameController>(GUID);
+            //Set up game mode detectors to start certain logic when loading into main game
+            GameAPI.RegisterExtraBehaviour<VRCameraGameController>(GUID + "_camera");
+            GameAPI.RegisterExtraBehaviour<VRControllerGameController>(GUID + "_controller");
 
             //Harmony init.  It's magic!
             Harmony harmonyCamera = new Harmony(GUID + "_camera");                        
             VRCameraHooks.InitHooks(harmonyCamera);
-
-            Harmony harmonyController = new Harmony(GUID + "_controller");
-            VRControllerColliderHooks.InitHooks(harmonyController, this);            
         }      
+
+
+
 
         internal void MoveWithTalkScene_SettingsChanged(object sender, System.EventArgs e) 
         {            
@@ -71,19 +74,17 @@ namespace KK_VREnhancement
             }
         }
 
+
         internal void EnableControllerColliders_SettingsChanged(object sender, System.EventArgs e) 
         {
             if (!EnableControllerColliders.Value) 
-            {
-                VRControllerColliderHooks.UnInitHooks(GUID + "_controller");
-                //Just stop the dynamic bone search loop
-                VRControllerColliderHelper.StopHelperCoroutine(this);
+            {            
+                //Force recalculate all verts.  With balloon active it will automatically calaulcate the correct new boundaries
+                VRControllerColliderHelper.StopHelperCoroutine();                                      
             } 
             else 
-            {
-                if (!VREnabled) return;
-                VRControllerColliderHelper.TriggerHelperCoroutine(this);
-                VRControllerColliderHooks.InitHooks();
+            {                
+                VRControllerColliderHelper.TriggerHelperCoroutine();
             }
         }
 

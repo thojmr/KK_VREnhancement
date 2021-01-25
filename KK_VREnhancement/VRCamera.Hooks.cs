@@ -24,7 +24,7 @@ namespace KK_VREnhancement
             harmonyInstance.UnpatchAll(harmonyGUID);
         }
 
-        //When the heroine changes position (ADVScene like Going to lunch, exercising, Date)
+        //When the heroine changes location (ADVScene like Going to lunch, exercising, Date)
         [HarmonyPostfix]
         [HarmonyPatch(typeof(ADVScene), "Update")]
         internal static void ADVScene_Update(ADVScene __instance)
