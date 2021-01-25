@@ -15,10 +15,10 @@ namespace KK_VREnhancement
         internal static void SetVRCamPosition(Transform advCam) 
         {
             float y = advCam.position.y;
-            float y2 = VRCamera.Instance.SteamCam.head.position.y;
+            float y2 = VRCamera.Instance.SteamCam.head.position.y + 0.1f;//To match head height (plus a little extra)
             Vector3 newPosition = new Vector3(advCam.position.x, y, advCam.position.z);
-            Vector3 b = new Vector3(VRCamera.Instance.SteamCam.head.position.x, y2, VRCamera.Instance.SteamCam.head.position.z);
-            VRCamera.Instance.SteamCam.origin.position += newPosition - b;       
+            Vector3 steamCamPos = new Vector3(VRCamera.Instance.SteamCam.head.position.x, y2, VRCamera.Instance.SteamCam.head.position.z);
+            VRCamera.Instance.SteamCam.origin.position += newPosition - steamCamPos;       
         }
 
         internal static void SetVRCamRotation(Transform advCam, Boolean reverseRotate = false) 
@@ -35,7 +35,7 @@ namespace KK_VREnhancement
         // Move the VR view to a new position and rotation (In front of the heroine) 
         internal static void MoveToFaceHeroine_ADVScene(Vector3 position, Quaternion rotation) 
         {
-            //Only move VR view when distance is greater than xf (meters?) Don't need to move VR view when heroine is just standing/sitting.
+            //Only move VR view when distance is greater than x (meters?) Don't need to move VR view when heroine is just standing/sitting.
             if (VRCameraHelper.IsNewPosition(lastIncommingPosition, position) == false) return;
 
             lastIncommingPosition = position;
@@ -45,7 +45,7 @@ namespace KK_VREnhancement
 
             SetVRCamRotation(newTransform, true);                   
             SetVRCamPosition(newTransform); 
-            VRCamera.Instance.SteamCam.origin.Translate(new Vector3(-1f, 0.1f, 0f));//Make some personal space  
+            VRCamera.Instance.SteamCam.origin.Translate(new Vector3(-1f, 0f, 0f));//Make some personal space  
         }
 
 
@@ -58,11 +58,12 @@ namespace KK_VREnhancement
             lastIncommingPosition = position;
             lastIncommingRotation = rotation;
 
-            Transform ActSceCamTransform = VRCameraHelper.ConvertPositionToTransform(position, rotation);
-            SetVRCamRotation(ActSceCamTransform, true);
-            SetVRCamPosition(ActSceCamTransform); 
+            Transform actSceCamTransform = VRCameraHelper.ConvertPositionToTransform(position, rotation);
+            SetVRCamRotation(actSceCamTransform, true);
+            SetVRCamPosition(actSceCamTransform); 
 
-            VRCamera.Instance.SteamCam.origin.Translate(new Vector3(-1f, 0.1f, 0f));//Move camera back from character, otherwise you get to see their insides :)
+            //Move camera back from character, otherwise you get to see their insides :)
+            VRCamera.Instance.SteamCam.origin.Translate(new Vector3(-1f, 0f, 0f));
         }
         
         internal static void ReverseRotate(Transform camTransform) 
