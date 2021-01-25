@@ -1,13 +1,14 @@
 # Introduction
 This repository contains the KK_VREnhancement plugin, that adds a few enhancements for VR in story mode.  Requires KoikatuVR.
+Not sure if I'll add much more to this right now.  Mostly working on other projects.
 
-## Additions
+## Features
 - Adds colliders to the VR controllers so you can use your hands for more than just menus.  Go forth and Boop!
 - When in a talk scene with another character the VR camera will follow the character as they move around the map.  By default you get left behind.  Can be turned off via config (F1).
 
 
 ## How to download
-(Coming soon) You can grab the latest plugin release [here](https://github.com/thojmr/KK_VREnhancement/releases), or build it yourself.  Explained further below.
+You can grab the first plugin release [here](https://github.com/thojmr/KK_VREnhancement/releases), or build it yourself.  Explained further below.
 
 ## How to install
 Almost all plugins are installed in the same way. If there are any extra steps needed they will be added to the plugin descriptions below.
