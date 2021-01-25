@@ -9,6 +9,7 @@ using KKAPI.MainGame;
 namespace KK_VREnhancement 
 {
     [BepInPlugin(GUID, GUID, Version)]
+    [BepInDependency("KoikatsuVR.unofficial", "0.7.1.1")]
     public class VRPlugin : BaseUnityPlugin 
     {
         public const string GUID = "KK_VREnhancement";
