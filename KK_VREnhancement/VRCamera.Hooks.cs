@@ -8,9 +8,20 @@ namespace KK_VREnhancement
 {
     public static class VRCameraHooks
     {
-        internal static void InitHooks(Harmony harmonyInstance)
+        public static Harmony harmonyInstance;
+
+        internal static void InitHooks(Harmony _harmonyInstance = null)
         {
+            if (_harmonyInstance != null) harmonyInstance = _harmonyInstance;
+
+            if (harmonyInstance == null) return;
             harmonyInstance.PatchAll(typeof(VRCameraHooks));
+        }
+
+        internal static void UnInitHooks(string harmonyGUID)
+        {
+            if (harmonyInstance == null) return;
+            harmonyInstance.UnpatchAll(harmonyGUID);
         }
 
         //When the heroine changes position (ADVScene like Going to lunch, exercising, Date)

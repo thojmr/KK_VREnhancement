@@ -50,10 +50,11 @@ namespace KK_VREnhancement
             GameAPI.RegisterExtraBehaviour<VRCameraGameController>(GUID);
 
             //Harmony init.  It's magic!
-            Harmony harmony = new Harmony(GUID);
-                        
-            VRCameraHooks.InitHooks(harmony);
-            VRControllerColliderHooks.InitHooks(harmony, this);            
+            Harmony harmonyCamera = new Harmony(GUID + "_camera");                        
+            VRCameraHooks.InitHooks(harmonyCamera);
+
+            Harmony harmonyController = new Harmony(GUID + "_controller");
+            VRControllerColliderHooks.InitHooks(harmonyController, this);            
         }      
 
         internal void MoveWithTalkScene_SettingsChanged(object sender, System.EventArgs e) 
@@ -61,6 +62,11 @@ namespace KK_VREnhancement
             if (!MoveWithTalkScene.Value) 
             {
                 VRCameraController.ClearLastPosition();
+                VRCameraHooks.UnInitHooks(GUID + "_camera");
+            }
+            else 
+            {
+                VRCameraHooks.InitHooks();
             }
         }
 
@@ -68,6 +74,7 @@ namespace KK_VREnhancement
         {
             if (!EnableControllerColliders.Value) 
             {
+                VRControllerColliderHooks.UnInitHooks(GUID + "_controller");
                 //Just stop the dynamic bone search loop
                 VRControllerColliderHelper.StopHelperCoroutine(this);
             } 
@@ -75,6 +82,7 @@ namespace KK_VREnhancement
             {
                 if (!VREnabled) return;
                 VRControllerColliderHelper.TriggerHelperCoroutine(this);
+                VRControllerColliderHooks.InitHooks();
             }
         }
 

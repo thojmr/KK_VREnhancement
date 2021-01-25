@@ -5,12 +5,22 @@ namespace KK_VREnhancement
 {    
     public static class VRControllerColliderHooks
     {
-        internal static VRPlugin _pluginInstance;
+        internal static VRPlugin pluginInstance;
+        internal static Harmony harmonyInstance;
 
-        internal static void InitHooks(Harmony harmonyInstance, VRPlugin instance)
+        internal static void InitHooks(Harmony _harmonyInstance = null, VRPlugin _pluginInstance = null)
         {
-            _pluginInstance = instance;
+            if (_pluginInstance != null) pluginInstance = _pluginInstance;
+            if (_harmonyInstance != null) harmonyInstance = _harmonyInstance;
+
+            if (harmonyInstance == null) return;
             harmonyInstance.PatchAll(typeof(VRControllerColliderHooks));
+        }
+
+        internal static void UnInitHooks(string harmonyGUID)
+        {
+            if (harmonyInstance == null) return;
+            harmonyInstance.UnpatchAll(harmonyGUID);
         }
 
         [HarmonyPostfix]
@@ -19,7 +29,7 @@ namespace KK_VREnhancement
         {
             if (!VRPlugin.VREnabled || !VRPlugin.EnableControllerColliders.Value) return;   
 
-            VRControllerColliderHelper.TriggerHelperCoroutine(_pluginInstance);    
+            VRControllerColliderHelper.TriggerHelperCoroutine(pluginInstance);    
         }
 
         [HarmonyPostfix]
@@ -29,7 +39,7 @@ namespace KK_VREnhancement
             if (!VRPlugin.VREnabled || !VRPlugin.EnableControllerColliders.Value) return;
             if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" NPCLoadAll ");
         
-            VRControllerColliderHelper.TriggerHelperCoroutine(_pluginInstance);
+            VRControllerColliderHelper.TriggerHelperCoroutine(pluginInstance);
         }
 
 
