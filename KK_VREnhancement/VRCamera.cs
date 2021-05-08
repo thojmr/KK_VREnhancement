@@ -15,7 +15,7 @@ namespace KK_VREnhancement
         internal static void SetVRCamPosition(Transform advCam) 
         {
             float y = advCam.position.y;
-            float y2 = VRCamera.Instance.SteamCam.head.position.y + 0.1f;//To match head height (plus a little extra)
+            float y2 = VRCamera.Instance.SteamCam.head.position.y - 0.1f;//To match head height (plus a little extra)
             Vector3 newPosition = new Vector3(advCam.position.x, y, advCam.position.z);
             Vector3 steamCamPos = new Vector3(VRCamera.Instance.SteamCam.head.position.x, y2, VRCamera.Instance.SteamCam.head.position.z);
             VRCamera.Instance.SteamCam.origin.position += newPosition - steamCamPos;       

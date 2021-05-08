@@ -59,6 +59,12 @@ namespace KK_VREnhancement
         }      
 
 
+        //Check for controller input changes
+        internal void Update()
+        {
+            VRControllerInput.CheckInputForSqueezeTurn();            
+        }
+
 
 
         internal void MoveWithTalkScene_SettingsChanged(object sender, System.EventArgs e) 

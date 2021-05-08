@@ -59,7 +59,7 @@ namespace KK_VREnhancement
             VRCameraController.ClearLastPosition();                
         }
 
-        //When heroine changes to a new location (ActionScene, HScene)
+        //When heroine changes to a new location after user selects pink location pin (ActionScene, HScene)
         [HarmonyPostfix]
         [HarmonyPatch(typeof(HSceneProc), "SetLocalPosition", typeof(HSceneProc.AnimationListInfo))]
         internal static void HSceneProc_SetLocalPosition(HSceneProc __instance)
