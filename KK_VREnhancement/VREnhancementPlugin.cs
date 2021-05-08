@@ -10,12 +10,10 @@ namespace KK_VREnhancement
 {
     [BepInPlugin(GUID, GUID, Version)]
     [BepInDependency("KoikatsuVR.unofficial", "0.7.1.1")]
-    public class VRPlugin : BaseUnityPlugin 
+    public partial class VRPlugin : BaseUnityPlugin 
     {
         public const string GUID = "KK_VREnhancement";
         public const string Version = "0.1";
-        public static ConfigEntry<bool> MoveWithTalkScene { get; private set; }
-        public static ConfigEntry<bool> EnableControllerColliders { get; private set; }
 
         internal static new ManualLogSource Logger { get; private set; }
         internal static bool VREnabled = false;
@@ -31,13 +29,7 @@ namespace KK_VREnhancement
             Logger = base.Logger;
             VRControllerColliderHelper.pluginInstance = this;
 
-            MoveWithTalkScene = Config.Bind<bool>("VR General", "Enable move with scene", true, 
-                "Will move the VR camera view in front of the heroine as they move around during TalkScene/HScene.  This mimics the default KK behavior. \n\nWhen disabled, you stay put as the heroine moves around.");
-            MoveWithTalkScene.SettingChanged += MoveWithTalkScene_SettingsChanged;
-
-            EnableControllerColliders = Config.Bind<bool>("VR General", "Enable VR controller collision (boop!)", true, 
-                "Allows collision of VR controllers with all dynamic bones.\n\nBoop!");
-            EnableControllerColliders.SettingChanged += EnableControllerColliders_SettingsChanged;
+            PluginConfigInit();
 
             //Get VR flags
             bool noVrFlag = Environment.CommandLine.Contains("--novr");
@@ -62,36 +54,8 @@ namespace KK_VREnhancement
         //Check for controller input changes
         internal void Update()
         {
-            VRControllerInput.CheckInputForSqueezeTurn();            
-        }
-
-
-
-        internal void MoveWithTalkScene_SettingsChanged(object sender, System.EventArgs e) 
-        {            
-            if (!MoveWithTalkScene.Value) 
-            {
-                VRCameraController.ClearLastPosition();
-                VRCameraHooks.UnInitHooks(GUID + "_camera");
-            }
-            else 
-            {
-                VRCameraHooks.InitHooks();
-            }
-        }
-
-
-        internal void EnableControllerColliders_SettingsChanged(object sender, System.EventArgs e) 
-        {
-            if (!EnableControllerColliders.Value) 
-            {            
-                //Force recalculate all verts.  With balloon active it will automatically calaulcate the correct new boundaries
-                VRControllerColliderHelper.StopHelperCoroutine();                                      
-            } 
-            else 
-            {                
-                VRControllerColliderHelper.TriggerHelperCoroutine();
-            }
+            //When the user squeezes the controller, apply hand rotation to headset                    
+            VRControllerInput.CheckInputForSqueezeTurn();                        
         }
 
     }
