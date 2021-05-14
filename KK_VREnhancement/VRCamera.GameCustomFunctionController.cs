@@ -25,6 +25,7 @@ namespace KK_VREnhancement
 
         protected override void OnGameLoad(GameSaveLoadEventArgs args)
         {
+            VRCameraController.OnGameLoad();
         }
 
         protected override void OnPeriodChange(Cycle.Type period)

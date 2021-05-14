@@ -90,6 +90,7 @@
     <Compile Include="VRController.Collider.GameCustomFunctionController.cs" />
     <Compile Include="VRController.Input.cs" />
     <Compile Include="GUI/VREnhancementPlugin.Config.cs" />
+    <Compile Include="..\..\#DebugTools\DebugTools.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,6 +11,9 @@ namespace KK_VREnhancement
         internal static Vector3 lastIncommingPosition;
         internal static Quaternion lastIncommingRotation; 
 
+        internal static void OnGameLoad()
+        {
+        } 
 
         internal static void SetVRCamPosition(Transform advCam) 
         {
