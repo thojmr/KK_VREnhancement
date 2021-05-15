@@ -46,8 +46,10 @@ namespace KK_VREnhancement
             GameAPI.RegisterExtraBehaviour<VRControllerGameController>(GUID + "_controller");
 
             //Harmony init.  It's magic!
-            Harmony harmonyCamera = new Harmony(GUID + "_camera");                        
+            Harmony harmonyCamera = new Harmony(GUID + "_camera");                      
+            Harmony harmonyController = new Harmony(GUID + "_controller");
             VRCameraHooks.InitHooks(harmonyCamera);
+            VRControllerHooks.InitHooks(harmonyController);
         }      
 
 
