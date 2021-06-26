@@ -5,6 +5,7 @@ Not sure if I'll add much more to this right now.  Mostly working on other proje
 ## Features
 - Adds colliders to the VR controllers so you can use your hands for more than just menus.  Go forth and Boop!
 - When in a talk scene with another character the VR camera will follow the character as they move around the map.  By default you get left behind.  Can be turned off via config (F1).
+- Adds Squeeze to Rotate cocnfig option.  When you squeeze the vr controller and twist your wrist, you will rotate in VR.
 
 
 ## How to download
