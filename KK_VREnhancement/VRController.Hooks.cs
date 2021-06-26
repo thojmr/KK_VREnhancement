@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Reflection.Emit;
 using System.Collections.Generic;
 using KKAPI.MainGame;
-using VRGIN.Controls.Handlers;
+using VRGIN.Controls.Tools;
 
 namespace KK_VREnhancement
 {
@@ -27,21 +27,20 @@ namespace KK_VREnhancement
 
         //Prevent controller grip from taking MenuTool back (since it does rotation now)
         [HarmonyTranspiler]
-        [HarmonyPatch(typeof(MenuHandler), "CheckInput")]
+        [HarmonyPatch(typeof(MenuTool), "OnUpdate")]
         internal static IEnumerable<CodeInstruction> PreventTakeMenuTook_Transpiler(IEnumerable<CodeInstruction> instructions)
         {           
             List<CodeInstruction> instructionsList = new List<CodeInstruction>(instructions);
 
             for (var i = 0; i < instructionsList.Count; i++)
             {
-                //When the takeMenu op is found, set it to nop
-                if (instructionsList[i].operand != null && instructionsList[i].operand.ToString().Contains("TakeGUI(VRGIN.Visuals.GUIQuad)"))
+                if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" {instructionsList[i].operand} ");
+                
+                if (instructionsList[i].opcode == OpCodes.Ldc_I4_4)
                 {
                     if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" Transpiler matching operand found ");
-                    instructionsList.RemoveAt(i);
-                    instructionsList.RemoveAt(i -1);
-                    instructionsList.RemoveAt(i -2);
-                    instructionsList.RemoveAt(i -3);
+                    instructionsList[i].opcode = OpCodes.Ldc_I4_7;
+                    break;
                 }               
             }     
 
