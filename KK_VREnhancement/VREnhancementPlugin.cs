@@ -13,7 +13,7 @@ namespace KK_VREnhancement
     public partial class VRPlugin : BaseUnityPlugin 
     {
         public const string GUID = "KK_VREnhancement";
-        public const string Version = "0.1";
+        public const string Version = "0.2";
 
         internal static new ManualLogSource Logger { get; private set; }
         internal static bool VREnabled = false;
