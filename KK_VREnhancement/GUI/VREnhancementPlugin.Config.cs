@@ -23,8 +23,8 @@ namespace KK_VREnhancement
                 "Allows collision of VR controllers with all dynamic bones.\n\nBoop!");
             EnableControllerColliders.SettingChanged += EnableControllerColliders_SettingsChanged;
 
-            SqueezeToTurn = Config.Bind<bool>("VR General", "Squeeze to Turn", false, 
-                new ConfigDescription("Allows you to turn the headset by squeezing controllers."));
+            // SqueezeToTurn = Config.Bind<bool>("VR General", "Squeeze to Turn", false, 
+            //     new ConfigDescription("Allows you to turn the headset by squeezing controllers."));
           
         }      
 

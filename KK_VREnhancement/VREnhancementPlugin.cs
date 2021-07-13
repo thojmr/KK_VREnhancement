@@ -9,7 +9,8 @@ using KKAPI.MainGame;
 namespace KK_VREnhancement 
 {
     [BepInPlugin(GUID, GUID, Version)]
-    [BepInDependency("KoikatsuVR.unofficial", "0.7.1.1")]
+    [BepInProcess("Koikatu")]
+    [BepInProcess("Koikatsu Party")]
     public partial class VRPlugin : BaseUnityPlugin 
     {
         public const string GUID = "KK_VREnhancement";
@@ -33,8 +34,7 @@ namespace KK_VREnhancement
 
             //Get VR flags
             bool noVrFlag = Environment.CommandLine.Contains("--novr");
-            bool vrFlag = Environment.CommandLine.Contains("--novr");
-            VREnabled = !noVrFlag && (vrFlag || SteamVRDetector.IsRunning);            
+            VREnabled = !noVrFlag && SteamVRDetector.IsRunning;            
 
             if (VRPlugin.debugLog) VRPlugin.Logger.LogInfo($" VREnabled {VREnabled}");
             
@@ -49,7 +49,7 @@ namespace KK_VREnhancement
             Harmony harmonyCamera = new Harmony(GUID + "_camera");                      
             Harmony harmonyController = new Harmony(GUID + "_controller");
             VRCameraHooks.InitHooks(harmonyCamera);
-            VRControllerHooks.InitHooks(harmonyController);
+            // VRControllerHooks.InitHooks(harmonyController); Implemented by KK_MainGameVR 0.9.0 
         }      
 
 
@@ -57,7 +57,7 @@ namespace KK_VREnhancement
         internal void Update()
         {
             //When the user squeezes the controller, apply hand rotation to headset                    
-            VRControllerInput.CheckInputForSqueezeTurn();                        
+            // VRControllerInput.CheckInputForSqueezeTurn();        Implemented by KK_MainGameVR 0.9.0                
         }
 
     }

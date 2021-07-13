@@ -21,7 +21,7 @@ namespace KK_VREnhancement
         /// </summary>
         internal static void CheckInputForSqueezeTurn()
         {
-            if (!VRPlugin.SqueezeToTurn.Value) return;
+            if (VRPlugin.SqueezeToTurn == null || !VRPlugin.SqueezeToTurn.Value) return;
 
             //Right hand
             var rCtrl = GameObject.FindObjectOfType<RightController>();

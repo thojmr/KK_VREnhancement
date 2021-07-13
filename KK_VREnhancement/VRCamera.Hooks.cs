@@ -24,29 +24,30 @@ namespace KK_VREnhancement
             harmonyInstance.UnpatchAll(harmonyGUID);
         }
 
-        //When the heroine changes location (ADVScene like Going to lunch, exercising, Date)
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(ADVScene), "Update")]
-        internal static void ADVScene_Update(ADVScene __instance)
-        {
-            if (!VRPlugin.VREnabled || !VRPlugin.MoveWithTalkScene.Value) return;
+        // Implemented by KK_MainGameVR 0.9.0
+        // //When the heroine changes location (ADVScene like Going to lunch, exercising, Date)
+        // [HarmonyPostfix]
+        // [HarmonyPatch(typeof(ADVScene), "Update")]
+        // internal static void ADVScene_Update(ADVScene __instance)
+        // {
+        //     if (!VRPlugin.VREnabled || !VRPlugin.MoveWithTalkScene.Value) return;
 
-            MainScenario scenario = Traverse.Create(__instance).Field("scenario").GetValue<MainScenario>();
-            if (scenario == null || scenario.commandController == null) return;
+        //     MainScenario scenario = Traverse.Create(__instance).Field("scenario").GetValue<MainScenario>();
+        //     if (scenario == null || scenario.commandController == null) return;
 
-            System.Collections.Generic.Dictionary<int, ADV.CharaData> characters = scenario.commandController.Characters;
-            if (characters == null || characters.Count <= 0 || characters[0] == null) return;
+        //     System.Collections.Generic.Dictionary<int, ADV.CharaData> characters = scenario.commandController.Characters;
+        //     if (characters == null || characters.Count <= 0 || characters[0] == null) return;
 
-            //Get the main heroine (is it always at index 0, probably not)?
-            ChaControl charCtrl = characters[0].chaCtrl;
-            if (charCtrl == null || charCtrl.objHead == null) return;
+        //     //Get the main heroine (is it always at index 0, probably not)?
+        //     ChaControl charCtrl = characters[0].chaCtrl;
+        //     if (charCtrl == null || charCtrl.objHead == null) return;
 
-            //Gets heroines head position.  Will place the user facing this position
-            Transform heroineTransform = charCtrl.objHead.transform;
-            if (heroineTransform == null) return;
+        //     //Gets heroines head position.  Will place the user facing this position
+        //     Transform heroineTransform = charCtrl.objHead.transform;
+        //     if (heroineTransform == null) return;
 
-            VRCameraController.MoveToFaceHeroine_ADVScene(heroineTransform.position, heroineTransform.rotation);                
-        }
+        //     VRCameraController.MoveToFaceHeroine_ADVScene(heroineTransform.position, heroineTransform.rotation);                
+        // }
         
         //When the ADV scene (TalkScene) is done clear the last ADVScene position
         [HarmonyPostfix]
