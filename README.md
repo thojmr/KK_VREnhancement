@@ -1,11 +1,10 @@
 # Introduction
-This repository contains the KK_VREnhancement plugin, that adds a few enhancements for VR in story mode.  Requires KoikatuVR.
-Not sure if I'll add much more to this right now.  Mostly working on other projects.
+This repository contains the KK_VREnhancement plugin, that adds a few enhancements for VR in story mode.  Requires MainGameVR OR KoikatuVR.
+Probably not going to add any more features here, MainGameVR has fixed most of the TODO items I had on my list.
 
 ## Features
 - Adds colliders to the VR controllers so you can use your hands for more than just menus.  Go forth and Boop!
-- When in a talk scene with another character the VR camera will follow the character as they move around the map.  By default you get left behind.  Can be turned off via config (F1).
-- Adds Squeeze to Rotate cocnfig option.  When you squeeze the vr controller and twist your wrist, you will rotate in VR.
+`All other features were implemented by MainGamrVR repo, I recommend installing that plugin for VR gameplay`
 
 
 ## How to download
