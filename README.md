@@ -6,7 +6,7 @@ Probably not going to add any more features here, MainGameVR has fixed most of t
 ## Features
 - Adds colliders to the VR controllers so you can use your hands for more than just menus.  Go forth and Boop!
 
-`All other features were implemented by MainGamrVR repo, I recommend installing that plugin for VR gameplay`
+`All other features were implemented by MainGameVR repo, I recommend installing that plugin for VR gameplay`
 
 
 ## How to download
