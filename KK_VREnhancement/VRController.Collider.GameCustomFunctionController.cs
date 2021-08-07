@@ -10,7 +10,6 @@ namespace KK_VREnhancement
 
             //Set up controller colliders when main game starts
             VRControllerColliderHelper.TriggerHelperCoroutine();
-            VRControllerInput.OnGameLoad();
         }
     }
 }

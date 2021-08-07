@@ -42,22 +42,16 @@ namespace KK_VREnhancement
             if (!VREnabled) return;            
 
             //Set up game mode detectors to start certain logic when loading into main game
-            GameAPI.RegisterExtraBehaviour<VRCameraGameController>(GUID + "_camera");
             GameAPI.RegisterExtraBehaviour<VRControllerGameController>(GUID + "_controller");
 
             //Harmony init.  It's magic!
-            Harmony harmonyCamera = new Harmony(GUID + "_camera");                      
-            Harmony harmonyController = new Harmony(GUID + "_controller");
-            VRCameraHooks.InitHooks(harmonyCamera);
-            // VRControllerHooks.InitHooks(harmonyController); Implemented by KK_MainGameVR 0.9.0 
         }      
 
 
         //Check for controller input changes
         internal void Update()
         {
-            //When the user squeezes the controller, apply hand rotation to headset                    
-            // VRControllerInput.CheckInputForSqueezeTurn();        Implemented by KK_MainGameVR 0.9.0                
+             
         }
 
     }

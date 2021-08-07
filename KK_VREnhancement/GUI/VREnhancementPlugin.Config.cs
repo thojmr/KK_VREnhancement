@@ -5,7 +5,6 @@ namespace KK_VREnhancement
 {
     public partial class VRPlugin 
     {
-        public static ConfigEntry<bool> MoveWithTalkScene { get; private set; }
         public static ConfigEntry<bool> EnableControllerColliders { get; private set; }
         public static ConfigEntry<bool> SqueezeToTurn { get; private set; }
 
@@ -15,10 +14,6 @@ namespace KK_VREnhancement
         /// </summary>
         public void PluginConfigInit() 
         {
-            MoveWithTalkScene = Config.Bind<bool>("VR General", "Enable move with scene", true, 
-                "Will move the VR camera view in front of the heroine as they move around during TalkScene/HScene.  This mimics the default KK behavior. \n\nWhen disabled, you stay put as the heroine moves around.");
-            MoveWithTalkScene.SettingChanged += MoveWithTalkScene_SettingsChanged;
-
             EnableControllerColliders = Config.Bind<bool>("VR General", "Enable VR controller collision (boop!)", true, 
                 "Allows collision of VR controllers with all dynamic bones.\n\nBoop!");
             EnableControllerColliders.SettingChanged += EnableControllerColliders_SettingsChanged;
@@ -27,20 +22,6 @@ namespace KK_VREnhancement
             //     new ConfigDescription("Allows you to turn the headset by squeezing controllers."));
           
         }      
-
-
-        internal void MoveWithTalkScene_SettingsChanged(object sender, System.EventArgs e) 
-        {            
-            if (!MoveWithTalkScene.Value) 
-            {
-                VRCameraController.ClearLastPosition();
-                VRCameraHooks.UnInitHooks(GUID + "_camera");
-            }
-            else 
-            {
-                VRCameraHooks.InitHooks();
-            }
-        }
 
 
         internal void EnableControllerColliders_SettingsChanged(object sender, System.EventArgs e) 
