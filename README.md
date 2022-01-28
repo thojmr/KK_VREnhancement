@@ -1,12 +1,23 @@
 # Introduction
+`All features are now integrated into KK_MainGameVR and KKS_VR, I recommend installing one those plugins for VR gameplay.  I will leave this repo here for archival purposes.`
+<br>
+<br>
+[KKS_VR](https://github.com/IllusionMods/KKS_VR)
+<br>
+<br>
+[KK_MainGameVR](https://github.com/mosirnik/KK_MainGameVR)
+
+<br>
+<br>
+<br>
+<br>
+
 This repository contains the KK_VREnhancement plugin, that adds a few enhancements for VR in story mode.  Requires MainGameVR OR KoikatuVR.
 
 Probably not going to add any more features here, MainGameVR has fixed most of the TODO items I had on my list.
 
 ## Features
 - Adds colliders to the VR controllers so you can use your hands for more than just menus.  Go forth and Boop!
-
-`All other features were implemented by MainGameVR repo, I recommend installing that plugin for VR gameplay`
 
 
 ## How to download
